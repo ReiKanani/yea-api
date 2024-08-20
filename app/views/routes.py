@@ -277,7 +277,17 @@ def get_fields():
         return get_field(data.get("filter"))
     else:
         return jsonify(m.authentication_failed)
-
+        
+@bp.route('/reset/groups', methods=["POST"])
+@cross_origin()
+def reset_group_points(user_id):
+    data = request.json
+    api_key = data.get("key")
+    app_id = data.get("appid")
+    if authenticate_app(api_key, app_id):
+        return reset_groups()
+    else:
+        return jsonify(m.authentication_failed)
 
 @bp.errorhandler(404)
 def not_found_error(error):
