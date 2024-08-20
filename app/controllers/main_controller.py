@@ -190,6 +190,14 @@ def remove_points(group_id, points):
     else:
         return {"message": "False number of points (n >= 0)"}
 
+def reset_groups():
+    groups_collection = get_group_collection()
+    groups = groups_collection.find()
+    for group in groups:
+        group['_id'] = str(group['_id'])
+        remove_points(group['short_id'], 2000)
+    return {"Success" : "Groups were reset to 0 points"}
+
 def get_field(filter):
     field_collection = get_field_collection()
     fields = field_collection.find()
