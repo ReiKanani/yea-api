@@ -280,7 +280,7 @@ def get_fields():
         
 @bp.route('/reset/groups', methods=["POST"])
 @cross_origin()
-def reset_group_points(user_id):
+def reset_group_points():
     data = request.json
     api_key = data.get("key")
     app_id = data.get("appid")
